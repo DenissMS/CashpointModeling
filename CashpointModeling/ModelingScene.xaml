@@ -1,0 +1,7 @@
+﻿<UserControl x:Class="CashpointModeling.ModelingScene"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid>
+        <Canvas Name="CModelingScene" Width="600" Height="350"/>
+    </Grid>
+</UserControl>

@@ -1,0 +1,85 @@
+﻿<Window x:Class="CashpointModeling.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" ResizeMode="CanMinimize" Height="388" Width="750">
+    <Window.Resources>
+        <SolidColorBrush Color="#0776A0" x:Key="DefaultedBorderBrush" />
+        <SolidColorBrush Color="#3AA6D0" x:Key="HoverBrush" />
+        <SolidColorBrush Color="#024C68" x:Key="PressedBrush" />
+        <SolidColorBrush Color="#024C68" x:Key="PressedBorderBrush" />
+        
+        <Style TargetType="Button">
+            <Setter Property="SnapsToDevicePixels" Value="true" />
+            <Setter Property="OverridesDefaultStyle" Value="true" />
+            <Setter Property="Margin" Value="5,1" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="MinHeight" Value="23" />
+            <Setter Property="MinWidth" Value="75" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="Border" CornerRadius="2" BorderThickness="1" Background="#0776A0" BorderBrush="{x:Null}">
+                            <ContentPresenter Margin="2" HorizontalAlignment="Center" VerticalAlignment="Center" RecognizesAccessKey="True" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsKeyboardFocused" Value="true">
+                                <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource DefaultedBorderBrush}" />
+                            </Trigger>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource DefaultedBorderBrush}" />
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter TargetName="Border" Property="Background" Value="{StaticResource HoverBrush}" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter TargetName="Border" Property="Background" Value="{StaticResource PressedBrush}" />
+                                <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource PressedBorderBrush}" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter TargetName="Border" Property="Background" Value="Transparent" />
+                                <Setter TargetName="Border" Property="BorderBrush" Value="{x:Null}" />
+                                <Setter Property="Foreground" Value="DarkGray" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="150"/>
+        </Grid.ColumnDefinitions>
+        <Grid Name="Scene" Column="0"/>
+        <Grid Column="1" HorizontalAlignment="Right">
+            <StackPanel Margin="5">
+                <TextBlock Text="Количество банкоматов" HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" />
+                <TextBox Name="CashpointsCount" Width="40" Text="3" Margin="5,0" HorizontalContentAlignment="Center"/>
+                <TextBlock Text="Количество клиентов" HorizontalAlignment="Center" TextAlignment="Center"  TextWrapping="Wrap"/>
+                <TextBox Name="ClientsCount" Width="40" Text="10" Margin="5,0" HorizontalContentAlignment="Center"/>
+                <TextBlock Text="Время ожидания" HorizontalAlignment="Center" TextAlignment="Center"  TextWrapping="Wrap"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <TextBox Name="WaitingTimeLowerLimit" Width="40" Text="1" Margin="5,0" HorizontalContentAlignment="Center"/>
+                    <TextBox Name="WaitingTimeUpperLimit" Width="40" Text="5" Margin="5,0" HorizontalContentAlignment="Center"/>
+                </StackPanel>
+                <TextBlock Text="Формула ожидания" HorizontalAlignment="Center" TextAlignment="Center"  TextWrapping="Wrap"/>
+                <TextBox Name="WaitingTimeFormula" Width="90" Text="x" Margin="5,0" HorizontalContentAlignment="Center"/>
+                <TextBlock Text="Время взаимодействия" HorizontalAlignment="Center" TextAlignment="Center"  TextWrapping="Wrap"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <TextBox Name="InteractionTimeLowerLimit" Width="40" Text="1" Margin="5,0" HorizontalContentAlignment="Center"/>
+                    <TextBox Name="InteractionTimeUpperLimit" Width="40" Text="5" Margin="5,0" HorizontalContentAlignment="Center"/>
+                </StackPanel>
+                <TextBlock Text="Формула вр. взаимодействия:" HorizontalAlignment="Center" TextAlignment="Center"  TextWrapping="Wrap"/>
+                <TextBox Name="InteractionTimeFormula" Width="90" Text="x" Margin="5,0" HorizontalContentAlignment="Center"/>
+                
+                <Button Name="Create" Content="Create" Click="Create_OnClick"/>
+                <Button Name="Start" Content="Start" Click="Start_Click"/>
+                <Button Name="Pause" Content="Pause" Click="Pause_Click"/>
+                <Button Name="Stop" Content="Stop" Click="Stop_Click"/>
+                
+                <StackPanel Name="ClientsInfo"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>
